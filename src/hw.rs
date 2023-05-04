@@ -49,15 +49,12 @@ pub mod spi {
     pub type SocketPhysical<'a, D> =
         ConnectedSocket<'a, CsPin, BusyPin, SpiPhysical, HalSpiError, D>;
 
-    pub type SpiPhysical = Spi<
-        SPI2,
-        (
-            PB13<hal::gpio::Input>,
-            PB14<hal::gpio::Input>,
-            PB15<hal::gpio::Input>,
-        ),
-        TransferModeNormal,
-    >;
+    pub type SpiPhysical = Spi<SPI2>;
+    pub type Pins = (
+        PB13<hal::gpio::Input>,
+        PB14<hal::gpio::Input>,
+        PB15<hal::gpio::Input>,
+    );
 }
 
 #[cfg(all(not(feature = "spi"), feature = "spi_alt"))]
@@ -69,13 +66,10 @@ pub mod spi {
     pub type SocketPhysical<'a, D> =
         ConnectedSocket<'a, CsPin, BusyPin, SpiPhysical, HalSpiError, D>;
 
-    pub type SpiPhysical = Spi<
-        SPI1,
-        (
-            PA5<hal::gpio::Input>,
-            PA6<hal::gpio::Input>,
-            PA7<hal::gpio::Input>,
-        ),
-        TransferModeNormal,
-    >;
+    pub type SpiPhysical = Spi<SPI1>;
+    pub type Pins = (
+        PA5<hal::gpio::Input>,
+        PA6<hal::gpio::Input>,
+        PA7<hal::gpio::Input>,
+    );
 }

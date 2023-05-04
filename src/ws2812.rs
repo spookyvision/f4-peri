@@ -21,7 +21,7 @@ mod ws_hw {
 }
 
 use ws_hw::*;
-pub type WsSpi = Spi<LedSpi, (NoSck, NoMiso, DataPin), TransferModeNormal>;
+pub type WsSpi = Spi<LedSpi>;
 
 pub type WS = Ws2812<WsSpi>;
 use hal::rcc::Clocks;
@@ -29,7 +29,7 @@ use hal::rcc::Clocks;
 pub fn spi(spi: LedSpi, data_pin: DataPin, clocks: &Clocks) -> WsSpi {
     WsSpi::new(
         spi,
-        (NoSck {}, NoMiso {}, data_pin),
+        (NoSck::new(), NoMiso::new(), data_pin),
         ws2812_spi::MODE,
         2400.kHz(),
         &clocks,
